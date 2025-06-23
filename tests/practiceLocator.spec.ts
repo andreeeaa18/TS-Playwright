@@ -1,5 +1,4 @@
-import { test, expect } from "@playwright/test";
-import { TIMEOUT } from "dns";
+import { test } from "@playwright/test";
 
 test("Practice of Locator Method", async ({ page }) => {
   await page.goto("https://www.saucedemo.com");
@@ -38,11 +37,7 @@ test("Practice with getBy Methods", async ({ page }) => {
   await page.getByLabel("Email").fill("testcodeautomaye@gmail.com");
   await page.getByPlaceholder("Search store").fill("Mobile");
 
-  await expect(page.getByText("New Customer")).toBeVisible();
-  const newCustomerText = await page
-    .getByText("New Customer", { exact: true })
-    .textContent();
-  console.log("New Customer text:", newCustomerText);
+  await page.getByText("New Customer", { exact: true }).textContent();
 
   await page.getByAltText("nopCommerce demo store").click();
 
