@@ -25,3 +25,10 @@ test("Handle select Dropdown with label", async ({ page }) => {
     .getByLabel("Choose a car:")
     .selectOption({ label: "Audi" });
 });
+
+test("Handle multi select dropdown", async ({ page }) => {
+  await page.goto("https://demoqa.com/select-menu");
+  //   await page.locator("#cars").selectOption("Opel");
+
+  await page.locator("#cars").selectOption(["Volvo", "Opel", "Audi"]);
+});
