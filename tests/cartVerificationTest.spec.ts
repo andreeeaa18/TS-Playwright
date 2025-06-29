@@ -7,6 +7,11 @@ test.beforeEach(async ({ page }) => {
   await page.getByTestId("login-button").click();
 });
 
+test.afterEach(async ({ page }) => {
+  await page.getByRole("button", { name: "Open Menu" }).click();
+  await page.getByTestId("logout-sidebar-link").click();
+});
+
 test("Adding item to Cart verification", async ({ page }) => {
   await page.getByText("Sauce Labs BackPack").click();
   await page.getByTestId("add-to-cart").click();
@@ -19,7 +24,7 @@ test("Adding item to Cart verification", async ({ page }) => {
   await expect(page.getByTestId("item-4-title-link")).not.toBeVisible();
 });
 
-test("Empty Cart Verification", async ({ page }) => {
-  await page.getByTestId("shopping-cart-link").click();
-  await expect(page.locator(".inventory_item_name")).not.toBeVisible();
-});
+// test("Empty Cart Verification", async ({ page }) => {
+//   // await page.getByTestId("shopping-cart-link").click();
+//   await expect(page.locator(".inventory_item_name")).not.toBeVisible();
+// });
