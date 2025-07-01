@@ -12,6 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  // globalSetup: "./global-setup.ts",
   testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -29,11 +30,12 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: "on-first-retry",
+    trace: "on",
     testIdAttribute: "data-test",
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     // headless: false,
+    // storageState: "./playwright/.auth/auth.json",
   },
 
   timeout: 50000,
@@ -41,13 +43,26 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: "setup",
+      testMatch: /.*\.setup\.ts/,
+      // testMatch: "global.setup.ts" },
+    },
+    {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      dependencies: ["setup"],
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "./playwright/.auth/auth.json",
+      },
     },
 
     {
       name: "firefox",
-      use: { ...devices["Desktop Firefox"] },
+      dependencies: ["setup"],
+      use: {
+        ...devices["Desktop Firefox"],
+        storageState: "./playwright/.auth/auth.json",
+      },
     },
 
     // {
