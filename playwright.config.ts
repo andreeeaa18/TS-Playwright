@@ -30,7 +30,11 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://localhost:3000',
     baseURL: "https://restful-booker.herokuapp.com",
-    extraHTTPHeaders: { Accept: "application/json" },
+    extraHTTPHeaders: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Basic YWRtaW46cGFzc3dvcmQxMjM=",
+    },
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on",
