@@ -1,5 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 
 /**
  * Read environment variables from file.
@@ -8,11 +8,11 @@ import dotenv from "dotenv";
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
-dotenv.config({
-  path: process.env.TEST_ENV
-    ? `./env-files/.env.${process.env.TEST_ENV}`
-    : `./env-files/.env.dev`,
-});
+// dotenv.config({
+//   path: process.env.TEST_ENV
+//     ? `./env-files/.env.${process.env.TEST_ENV}`
+//     : `./env-files/.env.dev`,
+// });
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -29,7 +29,7 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["html", { open: "always" }]],
+  reporter: [["dot"], ["list"], ["html", { open: "on-failure" }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
